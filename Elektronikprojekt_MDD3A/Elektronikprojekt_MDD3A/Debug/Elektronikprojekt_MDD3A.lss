@@ -1,0 +1,364 @@
+
+Elektronikprojekt_MDD3A.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  0000027a  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000206  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000006  00800100  00800100  0000027a  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  0000027a  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000002ac  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000090  00000000  00000000  000002ec  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000a87  00000000  00000000  0000037c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000849  00000000  00000000  00000e03  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000525  00000000  00000000  0000164c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  000000f8  00000000  00000000  00001b74  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000004f2  00000000  00000000  00001c6c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000000cb  00000000  00000000  0000215e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000050  00000000  00000000  00002229  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   8:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  10:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  14:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  18:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  1c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  20:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  24:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  28:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  2c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  30:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  34:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  38:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  3c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  40:	0c 94 48 00 	jmp	0x90	; 0x90 <__vector_16>
+  44:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  48:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  4c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  50:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  54:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  58:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  5c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  60:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  64:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_clear_bss>:
+  74:	21 e0       	ldi	r18, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	01 c0       	rjmp	.+2      	; 0x7e <.do_clear_bss_start>
+
+0000007c <.do_clear_bss_loop>:
+  7c:	1d 92       	st	X+, r1
+
+0000007e <.do_clear_bss_start>:
+  7e:	a6 30       	cpi	r26, 0x06	; 6
+  80:	b2 07       	cpc	r27, r18
+  82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
+  84:	0e 94 75 00 	call	0xea	; 0xea <main>
+  88:	0c 94 01 01 	jmp	0x202	; 0x202 <_exit>
+
+0000008c <__bad_interrupt>:
+  8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000090 <__vector_16>:
+
+/* Include directives */
+#include "motor_controller.h"
+
+ISR (TIMER0_OVF_vect)
+{
+  90:	1f 92       	push	r1
+  92:	0f 92       	push	r0
+  94:	0f b6       	in	r0, 0x3f	; 63
+  96:	0f 92       	push	r0
+  98:	11 24       	eor	r1, r1
+  9a:	2f 93       	push	r18
+  9c:	3f 93       	push	r19
+  9e:	4f 93       	push	r20
+  a0:	5f 93       	push	r21
+  a2:	6f 93       	push	r22
+  a4:	7f 93       	push	r23
+  a6:	8f 93       	push	r24
+  a8:	9f 93       	push	r25
+  aa:	af 93       	push	r26
+  ac:	bf 93       	push	r27
+  ae:	ef 93       	push	r30
+  b0:	ff 93       	push	r31
+	static volatile uint8_t overflow_interrupt_counter = 0;
+	
+	if (++overflow_interrupt_counter >= 4)
+  b2:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+  b6:	8f 5f       	subi	r24, 0xFF	; 255
+  b8:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+  bc:	84 30       	cpi	r24, 0x04	; 4
+  be:	20 f0       	brcs	.+8      	; 0xc8 <__vector_16+0x38>
+	{
+		motor_controller_set_pwm_value();
+  c0:	0e 94 7e 00 	call	0xfc	; 0xfc <motor_controller_set_pwm_value>
+		overflow_interrupt_counter = 0;	
+  c4:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <__DATA_REGION_ORIGIN__>
+	}
+	
+	return;
+  c8:	ff 91       	pop	r31
+  ca:	ef 91       	pop	r30
+  cc:	bf 91       	pop	r27
+  ce:	af 91       	pop	r26
+  d0:	9f 91       	pop	r25
+  d2:	8f 91       	pop	r24
+  d4:	7f 91       	pop	r23
+  d6:	6f 91       	pop	r22
+  d8:	5f 91       	pop	r21
+  da:	4f 91       	pop	r20
+  dc:	3f 91       	pop	r19
+  de:	2f 91       	pop	r18
+  e0:	0f 90       	pop	r0
+  e2:	0f be       	out	0x3f, r0	; 63
+  e4:	0f 90       	pop	r0
+  e6:	1f 90       	pop	r1
+  e8:	18 95       	reti
+
+000000ea <main>:
+#include "gpio.h"
+#include "motor_controller.h"
+
+int main(void)
+{
+    setup();
+  ea:	0e 94 f4 00 	call	0x1e8	; 0x1e8 <setup>
+	
+	motor_controller_set_direction(MOTOR_DIRECTION_FORWARD);
+  ee:	80 e0       	ldi	r24, 0x00	; 0
+  f0:	0e 94 d2 00 	call	0x1a4	; 0x1a4 <motor_controller_set_direction>
+	motor_controller_set_speed(100);
+  f4:	84 e6       	ldi	r24, 0x64	; 100
+  f6:	0e 94 ba 00 	call	0x174	; 0x174 <motor_controller_set_speed>
+  fa:	ff cf       	rjmp	.-2      	; 0xfa <main+0x10>
+
+000000fc <motor_controller_set_pwm_value>:
+/********************************************************************************
+* motor_controller_set_pwm_value:
+*********************************************************************************/
+void motor_controller_set_pwm_value(void)
+{	
+	if (current_direction == MOTOR_DIRECTION_FORWARD)
+  fc:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <current_direction>
+ 100:	81 11       	cpse	r24, r1
+ 102:	1b c0       	rjmp	.+54     	; 0x13a <motor_controller_set_pwm_value+0x3e>
+	{
+		if (current_M1A_pwm_value < target_M1A_pwm_value)
+ 104:	90 91 05 01 	lds	r25, 0x0105	; 0x800105 <current_M1A_pwm_value>
+ 108:	80 91 04 01 	lds	r24, 0x0104	; 0x800104 <target_M1A_pwm_value>
+ 10c:	98 17       	cp	r25, r24
+ 10e:	30 f4       	brcc	.+12     	; 0x11c <motor_controller_set_pwm_value+0x20>
+		{
+			current_M1A_pwm_value++;
+ 110:	80 91 05 01 	lds	r24, 0x0105	; 0x800105 <current_M1A_pwm_value>
+ 114:	8f 5f       	subi	r24, 0xFF	; 255
+ 116:	80 93 05 01 	sts	0x0105, r24	; 0x800105 <current_M1A_pwm_value>
+ 11a:	0b c0       	rjmp	.+22     	; 0x132 <motor_controller_set_pwm_value+0x36>
+		}
+		else if (current_M1A_pwm_value > target_M1A_pwm_value)
+ 11c:	90 91 05 01 	lds	r25, 0x0105	; 0x800105 <current_M1A_pwm_value>
+ 120:	80 91 04 01 	lds	r24, 0x0104	; 0x800104 <target_M1A_pwm_value>
+ 124:	89 17       	cp	r24, r25
+ 126:	28 f4       	brcc	.+10     	; 0x132 <motor_controller_set_pwm_value+0x36>
+		{
+			current_M1A_pwm_value--;
+ 128:	80 91 05 01 	lds	r24, 0x0105	; 0x800105 <current_M1A_pwm_value>
+ 12c:	81 50       	subi	r24, 0x01	; 1
+ 12e:	80 93 05 01 	sts	0x0105, r24	; 0x800105 <current_M1A_pwm_value>
+		}
+		
+		OCR0A = current_M1A_pwm_value;
+ 132:	80 91 05 01 	lds	r24, 0x0105	; 0x800105 <current_M1A_pwm_value>
+ 136:	87 bd       	out	0x27, r24	; 39
+ 138:	08 95       	ret
+	}
+	else if (current_direction == MOTOR_DIRECTION_BACKWARD)
+ 13a:	81 30       	cpi	r24, 0x01	; 1
+ 13c:	d1 f4       	brne	.+52     	; 0x172 <motor_controller_set_pwm_value+0x76>
+	{
+		if (current_M1B_pwm_value < target_M1B_pwm_value)
+ 13e:	90 91 03 01 	lds	r25, 0x0103	; 0x800103 <current_M1B_pwm_value>
+ 142:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <target_M1B_pwm_value>
+ 146:	98 17       	cp	r25, r24
+ 148:	30 f4       	brcc	.+12     	; 0x156 <motor_controller_set_pwm_value+0x5a>
+		{
+			current_M1B_pwm_value++;
+ 14a:	80 91 03 01 	lds	r24, 0x0103	; 0x800103 <current_M1B_pwm_value>
+ 14e:	8f 5f       	subi	r24, 0xFF	; 255
+ 150:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <current_M1B_pwm_value>
+ 154:	0b c0       	rjmp	.+22     	; 0x16c <motor_controller_set_pwm_value+0x70>
+		}
+		else if (current_M1B_pwm_value > target_M1B_pwm_value)
+ 156:	90 91 03 01 	lds	r25, 0x0103	; 0x800103 <current_M1B_pwm_value>
+ 15a:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <target_M1B_pwm_value>
+ 15e:	89 17       	cp	r24, r25
+ 160:	28 f4       	brcc	.+10     	; 0x16c <motor_controller_set_pwm_value+0x70>
+		{
+			current_M1B_pwm_value--;
+ 162:	80 91 03 01 	lds	r24, 0x0103	; 0x800103 <current_M1B_pwm_value>
+ 166:	81 50       	subi	r24, 0x01	; 1
+ 168:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <current_M1B_pwm_value>
+		}
+		
+		OCR0B = current_M1B_pwm_value;
+ 16c:	80 91 03 01 	lds	r24, 0x0103	; 0x800103 <current_M1B_pwm_value>
+ 170:	88 bd       	out	0x28, r24	; 40
+ 172:	08 95       	ret
+
+00000174 <motor_controller_set_speed>:
+/********************************************************************************
+* motor_controller_set_speed:
+*********************************************************************************/
+void motor_controller_set_speed(const uint8_t speed)
+{
+	if (current_M1A_pwm_value != target_M1A_pwm_value || current_M1B_pwm_value != target_M1B_pwm_value) return;
+ 174:	20 91 05 01 	lds	r18, 0x0105	; 0x800105 <current_M1A_pwm_value>
+ 178:	90 91 04 01 	lds	r25, 0x0104	; 0x800104 <target_M1A_pwm_value>
+ 17c:	29 13       	cpse	r18, r25
+ 17e:	11 c0       	rjmp	.+34     	; 0x1a2 <motor_controller_set_speed+0x2e>
+ 180:	20 91 03 01 	lds	r18, 0x0103	; 0x800103 <current_M1B_pwm_value>
+ 184:	90 91 02 01 	lds	r25, 0x0102	; 0x800102 <target_M1B_pwm_value>
+ 188:	29 13       	cpse	r18, r25
+ 18a:	0b c0       	rjmp	.+22     	; 0x1a2 <motor_controller_set_speed+0x2e>
+	
+	if (current_direction == MOTOR_DIRECTION_FORWARD)
+ 18c:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <current_direction>
+ 190:	91 11       	cpse	r25, r1
+ 192:	03 c0       	rjmp	.+6      	; 0x19a <motor_controller_set_speed+0x26>
+	{
+		target_M1A_pwm_value = speed;
+ 194:	80 93 04 01 	sts	0x0104, r24	; 0x800104 <target_M1A_pwm_value>
+ 198:	08 95       	ret
+	}
+	else if (current_direction == MOTOR_DIRECTION_BACKWARD)
+ 19a:	91 30       	cpi	r25, 0x01	; 1
+ 19c:	11 f4       	brne	.+4      	; 0x1a2 <motor_controller_set_speed+0x2e>
+	{
+		target_M1B_pwm_value = speed;
+ 19e:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <target_M1B_pwm_value>
+ 1a2:	08 95       	ret
+
+000001a4 <motor_controller_set_direction>:
+/********************************************************************************
+* motor_controller_set_direction:
+*********************************************************************************/
+void motor_controller_set_direction(const enum motor_direction new_direction)
+{
+	if (current_M1A_pwm_value > 0 || current_M1B_pwm_value > 0) return;
+ 1a4:	90 91 05 01 	lds	r25, 0x0105	; 0x800105 <current_M1A_pwm_value>
+ 1a8:	91 11       	cpse	r25, r1
+ 1aa:	1d c0       	rjmp	.+58     	; 0x1e6 <motor_controller_set_direction+0x42>
+ 1ac:	90 91 03 01 	lds	r25, 0x0103	; 0x800103 <current_M1B_pwm_value>
+ 1b0:	91 11       	cpse	r25, r1
+ 1b2:	19 c0       	rjmp	.+50     	; 0x1e6 <motor_controller_set_direction+0x42>
+	
+	if (new_direction == MOTOR_DIRECTION_FORWARD)
+ 1b4:	81 11       	cpse	r24, r1
+ 1b6:	0a c0       	rjmp	.+20     	; 0x1cc <motor_controller_set_direction+0x28>
+	{
+		M1A_ENABLE;
+ 1b8:	94 b5       	in	r25, 0x24	; 36
+ 1ba:	90 68       	ori	r25, 0x80	; 128
+ 1bc:	94 bd       	out	0x24, r25	; 36
+		M1B_DISABLE;
+ 1be:	94 b5       	in	r25, 0x24	; 36
+ 1c0:	9f 7d       	andi	r25, 0xDF	; 223
+ 1c2:	94 bd       	out	0x24, r25	; 36
+		PORTD &= ~(1 << M1B);
+ 1c4:	9b b1       	in	r25, 0x0b	; 11
+ 1c6:	9f 7d       	andi	r25, 0xDF	; 223
+ 1c8:	9b b9       	out	0x0b, r25	; 11
+ 1ca:	0b c0       	rjmp	.+22     	; 0x1e2 <motor_controller_set_direction+0x3e>
+	}
+	else if (new_direction == MOTOR_DIRECTION_BACKWARD)
+ 1cc:	81 30       	cpi	r24, 0x01	; 1
+ 1ce:	49 f4       	brne	.+18     	; 0x1e2 <motor_controller_set_direction+0x3e>
+	{
+		M1A_DISABLE;
+ 1d0:	94 b5       	in	r25, 0x24	; 36
+ 1d2:	9f 77       	andi	r25, 0x7F	; 127
+ 1d4:	94 bd       	out	0x24, r25	; 36
+		M1B_ENABLE;
+ 1d6:	94 b5       	in	r25, 0x24	; 36
+ 1d8:	90 62       	ori	r25, 0x20	; 32
+ 1da:	94 bd       	out	0x24, r25	; 36
+		PORTD &= ~(1 << M1A);
+ 1dc:	9b b1       	in	r25, 0x0b	; 11
+ 1de:	9f 7b       	andi	r25, 0xBF	; 191
+ 1e0:	9b b9       	out	0x0b, r25	; 11
+	}
+	current_direction = new_direction;
+ 1e2:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <current_direction>
+ 1e6:	08 95       	ret
+
+000001e8 <setup>:
+/********************************************************************************
+* init_gpio:
+*********************************************************************************/
+static inline void init_gpio(void)
+{
+	DDRD = (1 << M1A) | (1 << M1B);
+ 1e8:	80 e6       	ldi	r24, 0x60	; 96
+ 1ea:	8a b9       	out	0x0a, r24	; 10
+*			   corresponding interrupt vector (TIMER0 OVF).
+*			   By default the duty cycle is set to 0.
+*********************************************************************************/
+static inline void init_timer0(void)
+{
+	TCCR0A = (0b10 << COM0A0) | (0b10 << COM0B0) | (0b11 << WGM00);
+ 1ec:	83 ea       	ldi	r24, 0xA3	; 163
+ 1ee:	84 bd       	out	0x24, r24	; 36
+	TCCR0B = (0b011 << CS00);
+ 1f0:	83 e0       	ldi	r24, 0x03	; 3
+ 1f2:	85 bd       	out	0x25, r24	; 37
+	OCR0A = 0x00;
+ 1f4:	17 bc       	out	0x27, r1	; 39
+	OCR0B = 0x00;
+ 1f6:	18 bc       	out	0x28, r1	; 40
+	TIMSK0 = (1 << TOIE0);
+ 1f8:	81 e0       	ldi	r24, 0x01	; 1
+ 1fa:	80 93 6e 00 	sts	0x006E, r24	; 0x80006e <__TEXT_REGION_LENGTH__+0x7f806e>
+/********************************************************************************
+* init_interrupts:
+*********************************************************************************/
+static inline void init_interrupts(void)
+{
+	asm("SEI");
+ 1fe:	78 94       	sei
+ 200:	08 95       	ret
+
+00000202 <_exit>:
+ 202:	f8 94       	cli
+
+00000204 <__stop_program>:
+ 204:	ff cf       	rjmp	.-2      	; 0x204 <__stop_program>

@@ -1,17 +1,57 @@
 #include "i2c.h"
+#include "serial.h"
+#include <string.h> /* Include string header file */
+
+#define Slave_Address 0x20
 
 int main(void)
 {
-   DDRD = 0xFF;                    // Sätter I/O-portar D till output. Används för indiktions-leds att data har skrivits.
-   PORTC |= ((1 << 4) | (1 << 5)); // Sätter PORTC4 och PORTC5 till utportar. PORTC4 är ihopkopplad med SDA porten och PORTC5 är ihopkopplad med SCL porten.
-   i2c_init();			              // Initierar I2C kommunikation.
-   i2c_start();		              // Start för att börja snacka med Master.
-   (void)i2c_read();               // Läser av adressen och hårdvara kollar om den stämmer sedan slängs värdet.
-   PORTD = i2c_read();          	  // Läser av data och skriver det till PORTD. Detta används för att tända leds och se att skrivningen har skett korrekt.
+   serial_init();
    
-   while(1)
+   char buffer[10];
+   int8_t count = 0;
+   
+   I2C_Slave_Init(Slave_Address);
+   
+   serial_print_string("Slave Device");
+   serial_print_new_line();
+   
+   while (1)
    {
-   }
-   
-   return 0;
+      switch(I2C_Slave_Listen())				/* Check for SLA+W or SLA+R */
+      {
+         case 0:
+         {
+            serial_print_string("Receiving:       ");
+            serial_print_new_line();
+            count = I2C_Slave_Receive();
+            do
+            {
+               sprintf(buffer, "%d    ", count);
+               serial_print_string(buffer);
+               serial_print_new_line();  
+               count = I2C_Slave_Receive();	/* Receive data byte*/
+            } while (count != -1);			   /* Receive until STOP/REPEATED START */
+            count = 0;
+            break;
+         }
+         case 1:
+         {
+            int8_t Ack_status;
+            serial_print_string("Sending :       ");
+            serial_print_new_line();
+            do
+            {
+               Ack_status = I2C_Slave_Transmit(count); /* Send data byte */
+               sprintf(buffer, "%d    ",count);
+               serial_print_string(buffer);
+               serial_print_new_line();
+               count++;
+            } while (Ack_status == 0);				/* Send until Ack is receive */
+            break;
+          }
+          default:
+          break;
+       }
+    }
 }

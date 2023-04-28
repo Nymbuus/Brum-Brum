@@ -37,9 +37,7 @@ int8_t I2C_Slave_Listen()
       if (status == 0x70 || status == 0x78) // Kollar om generel kallning har tagits emot och returnerar ACK.
       {
          return 2;			                    // Returnerar 2 om ACK har tagits emot.
-      }
-      if (status == 0x80)
-      return 1;         
+      }         
       else
       continue;			                    // Om inget tagits emot körs loopen om.
    }
